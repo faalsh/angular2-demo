@@ -54,6 +54,13 @@ var HeroService = (function () {
             .then(function () { return null; })
             .catch(this.handleError);
     };
+    HeroService.prototype.create = function (name) {
+        var hero = { id: Math.floor(Math.random() * 1000), name: name };
+        return this.http.post(this.heroesUrl, hero)
+            .toPromise()
+            .then(function () { return hero; })
+            .catch(this.handleError);
+    };
     HeroService = __decorate([
         core_1.Injectable(), 
         __metadata('design:paramtypes', [http_1.Http])

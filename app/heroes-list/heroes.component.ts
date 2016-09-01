@@ -1,13 +1,13 @@
 import { Component, OnInit} from '@angular/core';
-import {Hero} from './hero'
-import { HeroService } from './hero.service';
+import {Hero} from '../data/hero'
+import { HeroService } from '../services/hero.service';
 import { Router } from '@angular/router';
 
 
 @Component({
   selector: 'my-heroes',
-  templateUrl: 'app/heroes.component.html', 
-  styleUrls: ['app/heroes.component.css']
+  templateUrl: 'app/heroes-list/heroes.component.html', 
+  styleUrls: ['app/heroes-list/heroes.component.css']
 
 })
 
@@ -44,15 +44,15 @@ export class HeroesComponent implements OnInit {
      this.router.navigate(link)
   }
 
-  // add(name: string): void {
-  //   name = name.trim();
-  //   if (!name) { return; }
-  //   this.heroService.create(name)
-  //     .then(hero => {
-  //       this.heroes.push(hero);
-  //       this.selectedHero = null;
-  //     });
-  // }
+  add(name: string): void {
+    name = name.trim();
+    if (!name) { return; }
+    this.heroService.create(name)
+      .then(hero => {
+        this.heroes.push(hero);
+        this.selectedHero = null;
+      });
+  }
   
   delete(hero: Hero): void {
     this.heroService

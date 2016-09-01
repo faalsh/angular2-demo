@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {Hero} from './hero'
+import {Hero} from '../data/hero'
 import { Headers, Http } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 
@@ -54,6 +54,17 @@ export class HeroService {
 	    .toPromise()
 	    .then(() => null)
 	    .catch(this.handleError);
+	}
+
+	create(name: string): Promise<Hero> {
+ 
+		let hero: Hero = {id: Math.floor(Math.random()*1000), name: name};
+
+		return this.http.post(this.heroesUrl, hero)
+			.toPromise()
+			.then(() => hero)
+			.catch(this.handleError);
+
 	}
 
 

@@ -9,7 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var hero_service_1 = require('./hero.service');
+var hero_service_1 = require('../services/hero.service');
 var router_1 = require('@angular/router');
 var HeroesComponent = (function () {
     function HeroesComponent(heroService, router) {
@@ -30,15 +30,18 @@ var HeroesComponent = (function () {
         var link = ['/detail', this.selectedHero.id];
         this.router.navigate(link);
     };
-    // add(name: string): void {
-    //   name = name.trim();
-    //   if (!name) { return; }
-    //   this.heroService.create(name)
-    //     .then(hero => {
-    //       this.heroes.push(hero);
-    //       this.selectedHero = null;
-    //     });
-    // }
+    HeroesComponent.prototype.add = function (name) {
+        var _this = this;
+        name = name.trim();
+        if (!name) {
+            return;
+        }
+        this.heroService.create(name)
+            .then(function (hero) {
+            _this.heroes.push(hero);
+            _this.selectedHero = null;
+        });
+    };
     HeroesComponent.prototype.delete = function (hero) {
         var _this = this;
         this.heroService
@@ -53,8 +56,8 @@ var HeroesComponent = (function () {
     HeroesComponent = __decorate([
         core_1.Component({
             selector: 'my-heroes',
-            templateUrl: 'app/heroes.component.html',
-            styleUrls: ['app/heroes.component.css']
+            templateUrl: 'app/heroes-list/heroes.component.html',
+            styleUrls: ['app/heroes-list/heroes.component.css']
         }), 
         __metadata('design:paramtypes', [hero_service_1.HeroService, router_1.Router])
     ], HeroesComponent);
